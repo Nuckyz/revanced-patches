@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings("unused")
 public class SpoofClientTokenPatch {
 
     private static final String CLIENT_VERSION = "iphone-9.0.50.511.gc711db6";
@@ -26,7 +27,7 @@ public class SpoofClientTokenPatch {
     private static final String SYSTEM_VERSION = "17.7.2";
 
     private static final String CLIENT_TOKEN_ENDPOINT = "https://clienttoken.spotify.com/v1/clienttoken";
-    private static final String IOS_USER_AGENT = "Spotify/9.0.50 iOS/17.7.2";
+    private static final String IOS_USER_AGENT = "Spotify/9.0.50 iOS/17.7.2 (iPhone16,1)";
 
     private static ClientTokenRequest buildClientTokenRequest(String deviceId) {
         return ClientTokenRequest.newBuilder()
@@ -78,7 +79,6 @@ public class SpoofClientTokenPatch {
                 return null;
             }
 
-            // Construct the 16-byte suffix from the two long values
             ByteBuffer suffixBuffer = ByteBuffer.allocate(16);
             suffixBuffer.putLong(target + counter);
             suffixBuffer.putLong(counter);
